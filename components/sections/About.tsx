@@ -1,60 +1,131 @@
 'use client'
 
-export default function About() {
+import { Heart, Target, Users } from 'lucide-react'
+
+/**
+ * About/Mission Section
+ * Displays the charity's purpose, vision, and impact
+ * Features:
+ * - Three-panel layout (Purpose, Vision, Why It Matters)
+ * - Timeline of milestones
+ * - Warm, compassionate design
+ * - Professional color scheme
+ */
+export function About() {
+  const pillars = [
+    {
+      icon: Heart,
+      title: 'Our Purpose',
+      description:
+        'We restore dignity and hope to people living with ostomies across Africa by collecting, sorting, and delivering essential medical supplies and dignity packs.',
+      color: 'text-primary',
+      bgColor: 'bg-primary/5',
+    },
+    {
+      icon: Target,
+      title: 'Our Vision',
+      description:
+        'A world where no one living with an ostomy lacks access to essential supplies or feels isolated. Where dignity is universal and hope is abundant.',
+      color: 'text-secondary',
+      bgColor: 'bg-secondary/5',
+    },
+    {
+      icon: Users,
+      title: 'Why It Matters',
+      description:
+        'Ostomy supplies are expensive and often unavailable in Africa. Without them, people face health complications, social stigma, and lost dignity. We bridge this gap.',
+      color: 'text-accent',
+      bgColor: 'bg-accent/5',
+    },
+  ]
+
+  const milestones = [
+    {
+      year: '2024',
+      title: 'Charity Registration',
+      description: 'Officially registered as UK Charity No. 1214173',
+    },
+    {
+      year: '2024',
+      title: 'First Shipment',
+      description: 'Delivered 5,000+ medical supplies to South Africa',
+    },
+    {
+      year: '2025',
+      title: 'Expansion',
+      description: 'Now serving 4 countries across Southern Africa',
+    },
+    {
+      year: '2025',
+      title: 'Growing Impact',
+      description: '31,752+ supplies distributed, 921.50kg saved from landfill',
+    },
+  ]
+
   return (
-    <section id="mission" className="py-20 bg-gradient-to-br from-amber-50 to-red-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="mission" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Mission</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Restoring dignity, hope, and human worth to people living with ostomies across Africa
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Who We Are
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            A faith-based, volunteer-led charity dedicated to restoring dignity and delivering hope.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {[
-            {
-              title: 'Our Purpose',
-              description: 'We believe every person deserves dignity, confidence, and access to essential medical supplies. Our mission is to transform lives through compassionate redistribution of stoma supplies.',
-              icon: '❤️',
-            },
-            {
-              title: 'Our Vision',
-              description: 'A world where people living with ostomies in Africa have equal access to supplies, support, and community. We build grassroots partnerships for sustainable change.',
-              icon: '🌟',
-            },
-            {
-              title: 'Why It Matters',
-              description: 'Ostomy care is a critical healthcare need. Many people across Africa lack access to supplies, leading to health complications and social isolation. We bridge this gap.',
-              icon: '🤝',
-            },
-          ].map((item, idx) => (
-            <div key={idx} className="bg-white rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow">
-              <div className="text-4xl mb-4">{item.icon}</div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">{item.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{item.description}</p>
-            </div>
-          ))}
+        {/* Three Pillars */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          {pillars.map((pillar, index) => {
+            const Icon = pillar.icon
+            return (
+              <div
+                key={index}
+                className={`${pillar.bgColor} rounded-xl p-8 hover:shadow-warm transition-all group`}
+              >
+                {/* Icon */}
+                <div className="mb-4">
+                  <Icon className={`w-12 h-12 ${pillar.color} group-hover:scale-110 transition-transform`} />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-2xl font-bold text-foreground mb-3">
+                  {pillar.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-muted-foreground leading-relaxed">
+                  {pillar.description}
+                </p>
+              </div>
+            )
+          })}
         </div>
 
         {/* Timeline */}
-        <div className="bg-white rounded-xl p-8 shadow-md">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Our Journey</h3>
-          <div className="space-y-6">
-            {[
-              { year: '2024', event: 'Footprints 2 Africa founded with vision to serve Africa' },
-              { year: '2025', event: 'Registered as UK Charity No. 1214173' },
-              { year: '2025', event: 'Distributed 31,752 supplies across 4 countries' },
-              { year: '2025', event: 'Saved 921.50kg of medical supplies from landfill' },
-            ].map((item, idx) => (
-              <div key={idx} className="flex gap-6">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-r from-amber-600 to-red-600 text-white font-bold">
-                    {item.year.slice(-2)}
-                  </div>
-                </div>
-                <div className="flex-grow">
-                  <p className="text-gray-900 font-semibold">{item.event}</p>
+        <div className="bg-gradient-soft rounded-xl p-12">
+          <h3 className="text-3xl font-bold text-foreground mb-12 text-center">
+            Our Journey
+          </h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {milestones.map((milestone, index) => (
+              <div key={index} className="relative">
+                {/* Timeline dot */}
+                <div className="absolute -left-4 md:left-1/2 md:-translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-white shadow-warm" />
+
+                {/* Content */}
+                <div className="md:ml-8 bg-white rounded-lg p-6 shadow-warm hover:shadow-warm-lg transition-all">
+                  <p className="text-sm font-semibold text-primary mb-2">
+                    {milestone.year}
+                  </p>
+                  <h4 className="text-lg font-bold text-foreground mb-2">
+                    {milestone.title}
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    {milestone.description}
+                  </p>
                 </div>
               </div>
             ))}

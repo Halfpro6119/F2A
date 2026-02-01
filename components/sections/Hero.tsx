@@ -1,70 +1,92 @@
 'use client'
 
-import { ArrowRight, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Heart, ArrowRight } from 'lucide-react'
 
-export default function Hero() {
+/**
+ * Hero Section
+ * Main landing section with compelling headline, subheadline, and CTAs
+ * Features:
+ * - Warm, compassionate design with professional colors
+ * - Impact statistics displayed prominently
+ * - Clear call-to-action buttons
+ * - Responsive layout for all screen sizes
+ */
+export function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-amber-50 pt-20">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center bg-gradient-soft pt-20 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden"
+    >
       {/* Decorative background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-10 w-72 h-72 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-20 left-10 w-72 h-72 bg-red-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
-      </div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -z-10" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="max-w-4xl mx-auto text-center animate-fade-in">
         {/* Main Headline */}
-        <div className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 mb-6 leading-tight">
-            Restoring Dignity,
-            <span className="block bg-gradient-to-r from-amber-600 to-red-600 bg-clip-text text-transparent">
-              Delivering Hope
-            </span>
-          </h1>
-          <p className="text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-            Connecting surplus medical supplies in the UK with people who urgently need them across Africa. One precious bag at a time.
-          </p>
-        </div>
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+          Restoring Dignity,{' '}
+          <span className="bg-gradient-primary bg-clip-text text-transparent">
+            Delivering Hope
+          </span>
+        </h1>
+
+        {/* Subheadline */}
+        <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+          Connecting surplus medical supplies in the UK with people who urgently need them across Africa. One precious bag at a time.
+        </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
           <Button
-            size="lg"
-            className="bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700 text-white text-lg px-8 py-6 rounded-lg shadow-lg hover:shadow-xl transition-all"
-            onClick={() => document.getElementById('donate')?.scrollIntoView({ behavior: 'smooth' })}
+            asChild
+            className="bg-primary hover:bg-secondary text-white font-semibold px-8 py-6 text-lg rounded-lg shadow-warm hover:shadow-warm-lg transition-all group"
           >
-            <Heart className="w-5 h-5 mr-2" />
-            Donate Now
+            <a href="#contact" className="flex items-center gap-2">
+              <Heart className="w-5 h-5" />
+              Donate Now
+            </a>
           </Button>
           <Button
-            size="lg"
+            asChild
             variant="outline"
-            className="text-lg px-8 py-6 rounded-lg border-2 border-gray-300 hover:border-amber-600 hover:text-amber-600"
-            onClick={() => document.getElementById('mission')?.scrollIntoView({ behavior: 'smooth' })}
+            className="border-2 border-primary text-primary hover:bg-primary/5 font-semibold px-8 py-6 text-lg rounded-lg transition-all group"
           >
-            How We Help
-            <ArrowRight className="w-5 h-5 ml-2" />
+            <a href="#mission" className="flex items-center gap-2">
+              How We Help
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
           </Button>
         </div>
 
         {/* Impact Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
-          {[
-            { number: '31,752', label: 'Donated Supplies', subtext: 'Since Feb 2025' },
-            { number: '921.50kg', label: 'Medical Supplies', subtext: 'Saved from Landfill' },
-            { number: '4', label: 'Countries Supported', subtext: 'Across Southern Africa' },
-          ].map((stat, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow border border-gray-100"
-            >
-              <div className="text-4xl font-bold bg-gradient-to-r from-amber-600 to-red-600 bg-clip-text text-transparent mb-2">
-                {stat.number}
-              </div>
-              <div className="text-gray-900 font-semibold mb-1">{stat.label}</div>
-              <div className="text-sm text-gray-500">{stat.subtext}</div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+          {/* Stat 1: Donated Supplies */}
+          <div className="bg-white rounded-xl p-6 shadow-warm hover:shadow-warm-lg transition-all group">
+            <div className="text-4xl sm:text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">
+              31,752
             </div>
-          ))}
+            <p className="text-foreground font-semibold mb-1">Donated Supplies</p>
+            <p className="text-sm text-muted-foreground">Since Feb 2025</p>
+          </div>
+
+          {/* Stat 2: Medical Supplies Saved */}
+          <div className="bg-white rounded-xl p-6 shadow-warm hover:shadow-warm-lg transition-all group">
+            <div className="text-4xl sm:text-5xl font-bold text-secondary mb-2 group-hover:scale-110 transition-transform">
+              921.50kg
+            </div>
+            <p className="text-foreground font-semibold mb-1">Medical Supplies</p>
+            <p className="text-sm text-muted-foreground">Saved from Landfill</p>
+          </div>
+
+          {/* Stat 3: Countries Supported */}
+          <div className="bg-white rounded-xl p-6 shadow-warm hover:shadow-warm-lg transition-all group">
+            <div className="text-4xl sm:text-5xl font-bold text-accent mb-2 group-hover:scale-110 transition-transform">
+              4
+            </div>
+            <p className="text-foreground font-semibold mb-1">Countries Supported</p>
+            <p className="text-sm text-muted-foreground">Across Southern Africa</p>
+          </div>
         </div>
       </div>
     </section>
